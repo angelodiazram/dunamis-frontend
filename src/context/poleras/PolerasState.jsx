@@ -1,0 +1,8 @@
+
+export const PolerasState = () => {
+    return (
+        <>
+            
+        </>
+    );
+};
