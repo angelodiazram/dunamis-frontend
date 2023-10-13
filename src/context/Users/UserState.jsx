@@ -1,3 +1,6 @@
+import { useReducer } from "react";
+import { userReducer } from "./UserReducer";
+import { axiosDunamisBackend } from "../../config/dunamisApi";
 import userContext from "./UserContext";
 
 // manejador de estado global para los usuarios
@@ -17,7 +20,21 @@ export const UserState = ({children}) => {
             }
         ]
     }
+
+    const [globalstate, dispatch] = useReducer(userReducer, userInitialState);
     
+    //* METODO GET DESDE EL BACKEN DE DUNAMIS
+
+    const getUser = async () => {
+        try {
+             const response = await axiosDunamisBackend.get('/usuarios');  //poner solo el final del end point en el get     
+            console.log(response);
+            } catch (error) {
+            
+        }
+    }
+
+
     return (
         <userContext.Provider
             value={{userInitialState}}
