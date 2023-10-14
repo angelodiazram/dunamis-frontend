@@ -4,26 +4,27 @@ import { axiosDunamisBackend } from "../../config/dunamisApi";
 import userContext from './UserContext'
 
 // manejador de estado global para los usuarios
-export const UserState = ({children}) => {
+export const UserState = ({ children }) => {
     
     // ESTADO POR DEFECTO DEL CONTEXTO GLOBAL PARA LOS USUARIOS
     const userInitialState = {
         users: [
             {
-                id: 0,
-                email: 'angelodiazram@gmail.com',
-                pass: 'angelo9802',
-                name: 'Angelo',
-                last_name: 'Díaz Ramírez',
-                rut: '18740986-1',
-                adress: 'Capitan Ignacio Carrera pinto 111b depto 301, ñuñoa'
+                id: '',
+                email: '',
+                pass: '',
+                name: '',
+                last_name: '',
+                rut: '',
+                adress: ''
             }
-        ]
+        ],
+        authStatus: false
     }
 
     const [globalstate, dispatch] = useReducer(userReducer, userInitialState);
     
-    //* METODO GET DESDE EL BACKEN DE DUNAMIS
+    //* METODO GET PARA OBTENER USUARIOS DESDE EL BACKEND DE DUNAMIS
 
     const getUser = async () => {
         try {
@@ -40,12 +41,28 @@ export const UserState = ({children}) => {
         }
     }
 
+    //* METODO POST PARA LA CRACIÓN DE USUARIOS
+    
+    const signupUser = async (dataForm) => {
+        try {
+            const response = await axiosDunamisBackend.post('/usuarios', dataForm)
+
+            dispatch({
+                type: "REGISTRAR_USUARIO",
+                payload: response.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
     return (
         <userContext.Provider
             value={{
                 userData: globalstate.users,
-                getUser
+                getUser,
+                signupUser
             }}
         >
             {children}

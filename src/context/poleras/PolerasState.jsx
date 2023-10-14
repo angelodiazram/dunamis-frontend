@@ -3,7 +3,7 @@ import { axiosDunamisBackend } from "../../config/dunamisApi";
 import { polerasReducer } from "./PolerasReducer";
 import PolerasContext from './polerasContext';
 
-export const PolerasState = () => {
+export const PolerasState = ({children}) => {
     
     const poleraInitialState = {
         poleras: [
@@ -28,6 +28,9 @@ export const PolerasState = () => {
                 type: "OBTENER_POLERAS_TODAS",
                 payload: response.data
             })
+
+            return response.data
+            
         } catch (error) {
             console.log(error)            
         }
@@ -38,10 +41,10 @@ export const PolerasState = () => {
         <PolerasContext.Provider
             value={{
                 polerasData: globalstate.poleras,
-                getUser
+                getPoleras
             }}
         >
-            
+            {children}
         </PolerasContext.Provider>
     );
 };
