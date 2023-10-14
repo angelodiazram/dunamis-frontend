@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import userContext from "../context/Users/UserContext";
 
 export const UserList = () => {
@@ -7,12 +7,14 @@ export const UserList = () => {
     el hook useContext trae el estado global que necesitemos utilizar para luego almacenarlo
     en una variable para poder utilizar sus metodos
     */
-    const globalUserContext = useContext(userContext);
+   const globalUserContext = useContext(userContext);
+   
+   const { userData, getUser } = globalUserContext;
+   
+   useEffect(() => {
+       getUser()
+   }, [])
 
-    console.log(globalUserContext);
-
-    const { users } = globalUserContext.userInitialState;
-    
     return (
         <>
             <h2>Lista de usuarios registrados</h2>
@@ -21,7 +23,7 @@ export const UserList = () => {
             para poder utilizar esa información 
             */}
             {
-                users.map(user => {
+                userData.map(user => {
                     return (
                         <div key={user.id}>
                             <h2></h2>
