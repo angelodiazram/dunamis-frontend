@@ -1,12 +1,17 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import userContext from "../context/Users/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export const SignupForm = () => {
     
+    // variables globales del contexto
     const userCtx = useContext(userContext)
-    
-    const { signupUser } = userCtx;
 
+    const navigate = useNavigate()
+    
+    const { signupUser, getUser } = userCtx;
+    
+    // manejo de variables locales del componente "SignupForm"
     const [ data, setData ] = useState({
         id: '',
         email: '',
@@ -28,7 +33,13 @@ export const SignupForm = () => {
         event.preventDefault()
         const user = signupUser(data)
         console.log(user)
+        alert('Has sido registrado con Exito')
+        navigate('/login')
     }
+
+    useEffect(() => {
+        getUser()
+    }, [])
 
     return (
         <>
@@ -36,35 +47,28 @@ export const SignupForm = () => {
                 <h2 className="text-center">Registrar</h2>
             </div>
 
-            <div className="d-flex justify-content-center align-items-center">
+            <div>
                 <form onSubmit={(e) => {onSubmitData(e)}}>
-                    <div>
-                        <label htmlFor="email"></label>
-                        <input type="email" name="email" id="email"onChange={(e) => {onChangeData(e)}} required/>
-                    </div>
-                    <div>
-                        <label htmlFor="password"></label>
-                        <input type="password" name="password" id="password"onChange={(e) => {onChangeData(e)}} required/>
-                    </div>
-                    <div>
-                        <label htmlFor="name"></label>
-                        <input type="text" name="name" id="name"onChange={(e) => {onChangeData(e)}} required/>
-                    </div>
-                    <div>
-                        <label htmlFor="last_name"></label>
-                        <input type="text" name="last_name" id="last_name"onChange={(e) => {onChangeData(e)}} required/>
-                    </div>
-                    <div>
-                        <label htmlFor="rut"></label>
-                        <input type="text" name="rut" id="rut"onChange={(e) => {onChangeData(e)}} required/>
-                    </div>
-                    <div>
-                        <label htmlFor="adress"></label>
-                        <input type="text" name="adress" id="adress"onChange={(e) => {onChangeData(e)}} required/>
-                    </div>
-                    <div className="d-flex justify-content-center align-items-center text-center">
+                    
+                        <label htmlFor="email">Correo electrónico</label>
+                        <input type="email" name="email" id="email" onChange={(e) => {onChangeData(e)}} required/>
+                
+                        <label htmlFor="pass">Contraseña</label>
+                        <input type="password" name="pass" id="password" autoComplete="current-password" onChange={(e) => {onChangeData(e)}} required/>
+                    
+                        <label htmlFor="name">Nombre</label>
+                        <input type="text" name="name" id="name" onChange={(e) => {onChangeData(e)}} required/>
+                    
+                        <label htmlFor="last_name">Apellidos</label>
+                        <input type="text" name="last_name" id=" last_name" onChange={(e) => {onChangeData(e)}} required/>
+                    
+                        <label htmlFor="rut">Rut</label>
+                        <input type="text" name="rut" id="rut" onChange={(e) => {onChangeData(e)}} required/>
+                    
+                        <label htmlFor="adress">Dirección</label>
+                        <textarea type="text" name="adress" id="adress" onChange={(e) => {onChangeData(e)}} required/>
+
                         <button className="btn btn-primary" type="submit">Registrar</button>
-                    </div>
                 </form>
             </div>
         </>

@@ -1,20 +1,12 @@
-import { useState } from "react";
+import { LoginFormUser } from "../components/LoginFormUser";
+
 
 export const LoginPage = () => {
-    
-    const [ email, setEmail ] =useState('');
-    const [ pass, setPass ] =useState('');
-    
-    
+
     return (
         <>
-            <form>
-                <label>Correo</label>
-                <input type="email" />
-                <label>Contraseña</label>
-                <input type="password" />
-                <button type="submit">Acceder</button>
-            </form>
+            <h2>Login page</h2>
+            <LoginFormUser />            
         </>
     );
 };

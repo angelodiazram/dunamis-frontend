@@ -30,7 +30,7 @@ export const UserState = ({ children }) => {
         try {
             //! SIEMPRE LA INFORMACIÓN PROVENIENTRE DE AXIOS LLEGARÁ EN UN OBJETO DE NOMBRE "data"
             const response = await axiosDunamisBackend.get('/usuarios');  //poner solo el final del end point en el get     
-            console.log(response.data);
+            console.log('Lista de usuarios hasta el momento', response.data);
 
             dispatch({
                 type: "OBTENER_USUARIOS_REGISTRADOS",
@@ -41,12 +41,12 @@ export const UserState = ({ children }) => {
         }
     }
 
-    //* METODO POST PARA LA CRACIÓN DE USUARIOS
-    
+    //* METODO POST PARA LA CRACIÓN DE USUARIOS 
     const signupUser = async (dataForm) => {
         try {
             const response = await axiosDunamisBackend.post('/usuarios', dataForm)
-
+            console.log(response.data)
+            
             dispatch({
                 type: "REGISTRAR_USUARIO",
                 payload: response.data
@@ -56,13 +56,40 @@ export const UserState = ({ children }) => {
         }
     }
 
+    //* METODO LOGIN PARA USUARIOS
+    const loginUser = async(dataForm) => {
+        try {
+            const response = await axiosDunamisBackend.post('/login', dataForm)
+
+            console.log(response.data);
+
+            dispatch({
+                type: "LOGIN",
+                payload: response.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    //*  METODO PARA CERRAR SESIÓN
+
+    const logoutUser = async () => {
+        dispatch({
+            type: "CERRAR_SESION"
+        })
+    }
+
 
     return (
         <userContext.Provider
             value={{
                 userData: globalstate.users,
+                authStatus: globalstate.authStatus,
                 getUser,
-                signupUser
+                signupUser,
+                loginUser,
+                logoutUser
             }}
         >
             {children}

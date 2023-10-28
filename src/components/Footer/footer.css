@@ -1,0 +1,86 @@
+#main-footer {
+    background-color: #E6CDE3;
+    padding-top: 20px;
+}
+
+#main-footer h3 {
+    font-family: 'DM Serif Display', serif;
+}
+
+#main-footer p{
+    font-family: 'Raleway', sans-serif;
+    text-align: justify;
+}
+
+/** INICIO TOP FOOTER  */
+
+#main-footer #top-footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+#main-footer #top-footer #adress {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+#main-footer #top-footer #contacto {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+#main-footer #top-footer #contacto #ul-contacto {
+    list-style: none;
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+
+#main-footer #top-footer #contacto #ul-contacto .li-contacto {
+    font-family: 'Raleway', sans-serif;
+}
+
+#main-footer #top-footer #nosotros {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+/** FIN TOP FOOTER  */
+/** INICIO BOTTOM FOOTER  */
+
+#main-footer #bottom-footer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+}
+
+
+#main-footer #bottom-footer #footer-logo {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    margin: 15px 0px;
+}
+
+#main-footer #bottom-footer #footer-logo  img {
+    width: 200px;
+} 
+
+#main-footer #bottom-footer #derechos {
+    display: flex;
+
+}
+
+#main-footer #bottom-footer #derechos p {
+    margin: 15px 0px;
+}
+
+
+/** FIN BOTTOM FOOTER  */
