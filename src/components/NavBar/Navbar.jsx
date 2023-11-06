@@ -7,6 +7,12 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import './navbar.css';
 
 export const Navbar = () => {
+
+    const handleScroll = (event) => {
+        window.s
+    }
+
+
     return (
         <>
             <header id="header-container">
@@ -44,14 +50,14 @@ export const Navbar = () => {
                             <NavLink to='/cuadernos' className='link'>Cuadernos</NavLink>
                         </li>
                         <li className="li-rutes">
-                            <NavLink to='/ropa' className='link'>Ropa</NavLink>
+                            <NavLink to='/poleras' className='link'>Poleras</NavLink>
                         </li>
                         <li className="li-rutes">
                             <NavLink to='/about' className='link'>Sobre nosotros</NavLink>
                         </li>
-                        <li className="li-rutes">
+                        {/* <li className="li-rutes">
                             <NavLink to='/cart' className='link'>Catalogo</NavLink>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </header>

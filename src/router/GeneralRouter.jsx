@@ -7,8 +7,9 @@ import { LoginPage } from "../pages/LoginPage"
 import { PrivateRoute } from "./PrivateRoute"
 import { ShoppingPage } from "../pages/ShoppingPage"
 import { CatalogoPage } from "../pages/CatalogoPage"
-
-
+import { PlannersPage } from "../pages/PlannersPage"
+import { CuadernosPage } from "../pages/CuadernosPage"
+import { PolerasPage } from "../pages/PolerasPage"
 
 export const GeneralRouter = () => {
     return (
@@ -20,6 +21,10 @@ export const GeneralRouter = () => {
                         <Route path="/catalogo" element={<CatalogoPage />}/>
                         <Route path="/login" element={<LoginPage />}/>
                         <Route path="/signup" element={<SignUpPage />}/>
+                        <Route path="/planners" element={<PlannersPage />}/>
+                        <Route path="/cuadernos" element={<CuadernosPage />}/>
+                        <Route path="/poleras" element={<PolerasPage />}/>
+
                         <Route 
                             path="poleras/*" 
                             element={

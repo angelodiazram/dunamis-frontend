@@ -26,7 +26,7 @@ export const Footer = () => {
                         <h3>Dirección</h3>
                         <hr />
                         <p>
-                            Estamos ubicados en Av. José Pedro Alessandri 1678, Ñuñoa a pasos del Mall Portal Ñuñoa y frente al UMCE.
+                            Estamos ubicados en Av. José Pedro Alessandri 665, Ñuñoa a pasos del Mall Portal Ñuñoa y frente al UMCE.
                         </p>
                     </div>
                 </section>

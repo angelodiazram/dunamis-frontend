@@ -1,0 +1,33 @@
+#article-about {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    width: 100%;
+    height: 300px;
+    padding: 10px;
+    margin-top: 20px;
+    justify-content: center;
+    align-content: center;
+} 
+
+
+#article-about #title-container {
+    width: 70%;
+}
+
+#article-about #p-container {
+    width: 70%;
+}
+
+#article-about #title-container h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+#article-about #p-container p {
+    font-family: 'Raleway', sans-serif;
+    font-size: 25px;
+    text-align: justify;
+}
