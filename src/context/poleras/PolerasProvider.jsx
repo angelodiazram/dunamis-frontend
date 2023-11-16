@@ -1,28 +1,22 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import { axiosDunamisBackend } from "../../config/dunamisApi";
 import { polerasReducer } from "./PolerasReducer";
 import PolerasContext from './polerasContext';
 
-export const PolerasState = ({children}) => {
+export const PolerasProvider = ({children}) => {
     
     const poleraInitialState = {
-        poleras: [
-            {
-                id: 0,
-                color: '',
-                talla: '',
-                precio: '',
-                SKU: 0
-            }
-        ]
+        poleras: []
     }
+
+    const [polerasCart, setPolerasCart] = useState([]);
     
-    const [globalstate, dispatch] = useReducer(polerasReducer, poleraInitialState)
+    const [polerasGlobalState, dispatch] = useReducer(polerasReducer, poleraInitialState)
     
     const getPoleras = async () => {
         try {
             const response = await axiosDunamisBackend.get('/poleras');
-            console.log(response.data)
+            // console.log(response.data)
 
             dispatch({
                 type: "OBTENER_POLERAS_TODAS",
@@ -40,8 +34,10 @@ export const PolerasState = ({children}) => {
     return (
         <PolerasContext.Provider
             value={{
-                polerasData: globalstate.poleras,
-                getPoleras
+                polerasData: polerasGlobalState.poleras,
+                getPoleras,
+                polerasCart,
+                setPolerasCart
             }}
         >
             {children}

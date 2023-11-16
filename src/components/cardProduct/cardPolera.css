@@ -1,0 +1,103 @@
+p {
+    /* para que sacar el margin por defecto de bootstrap */
+    margin-bottom: 0; 
+}
+
+#title {
+    text-align: center;
+    margin: 30px 0px;
+    font-size: 50px;
+    font-family: 'DM Serif Display', serif;
+}
+
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 30px;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #cbcbcb;
+    border-radius: 5px;
+    width: fit-content;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 30px;
+    transition: 200ms all;
+}
+
+.card-container:hover {
+    border: 1px solid #a7a6a6;
+    box-shadow: 0px 0px 3px #a7a6a6;
+}
+
+.card-container .img-container img {
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.card-container .description-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.card-container .description-container p {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+}
+
+.card-container .description-container .caracteristicas {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-container .description-container .caracteristicas span {
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 10px;
+}
+
+.card-container .precio-button {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-container .precio-button p{
+    margin-bottom: 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+}
+
+.card-container .precio-button .buttons-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: flex-end;
+    align-items: center;
+    gap: 5px;
+}
+
+.card-container .precio-button .buttons-container .button-cart {
+    width: fit-content;
+    font-family: 'Raleway', sans-serif;
+    background-color: #fff;
+    padding: 0px 5px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    transition: 300ms all;
+    
+}
+
+.card-container .precio-button .buttons-container .button-cart:hover {
+    background-color: #E6CDE3;
+    box-shadow: 2px 2px 3px #5e5d5d;
+}

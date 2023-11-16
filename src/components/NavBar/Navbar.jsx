@@ -5,13 +5,14 @@ import { faCartShopping, faRightToBracket } from "@fortawesome/free-solid-svg-ic
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 
 import './navbar.css';
+import { useContext } from "react";
+import PolerasContext from "../../context/poleras/polerasContext";
 
 export const Navbar = () => {
 
-    const handleScroll = (event) => {
-        window.s
-    }
+    const polerasCtx = useContext(PolerasContext)
 
+    const { polerasCart } = polerasCtx;
 
     return (
         <>
@@ -32,9 +33,14 @@ export const Navbar = () => {
                     <div id="cart-user">
                         <ul id="ul-cart">
                             <li className="icons"><NavLink className="top-link"><FontAwesomeIcon icon={faUser} /></NavLink></li>
-                            <li className="icons"><NavLink className="top-link"><FontAwesomeIcon icon={faCartShopping} /></NavLink></li>
-                            <li className="icons"><NavLink className="top-link"><FontAwesomeIcon icon={faRightToBracket} /></NavLink></li>
-                            <li className="icons"><NavLink className="top-link"><FontAwesomeIcon icon={faRightToBracket} rotation={180} /></NavLink></li>
+                            <li className="icons">
+                                <NavLink className="top-link" to='/carro'>
+                                    <FontAwesomeIcon icon={faCartShopping} />
+                                </NavLink>
+                                <span id="contador-carrito">{polerasCart.length}</span>
+                            </li>
+                            {/* <li className="icons"><NavLink className="top-link"><FontAwesomeIcon icon={faRightToBracket} /></NavLink></li>
+                            <li className="icons"><NavLink className="top-link"><FontAwesomeIcon icon={faRightToBracket} rotation={180} /></NavLink></li> */}
                         </ul>
                     </div>
                 </div>

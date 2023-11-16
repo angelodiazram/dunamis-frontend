@@ -1,47 +1,47 @@
 import { useReducer } from "react";
 import { userReducer } from "./UserReducer";
-import { axiosDunamisBackend } from "../../config/dunamisApi";
-import userContext from './UserContext'
 
-// manejador de estado global para los usuarios
-export const UserState = ({ children }) => {
-    
-    // ESTADO POR DEFECTO DEL CONTEXTO GLOBAL PARA LOS USUARIOS
+import { axiosDunamisBackend } from "../../config/dunamisApi";
+import userContext from "./UserContext";
+
+
+
+//! manejador de estado global para los usuarios
+export const UserProvider = ({ children }) => {
+
+    //! ESTADO INICIAL DEL REDUCER
     const userInitialState = {
-        users: [
-            {
-                id: '',
-                email: '',
-                pass: '',
-                name: '',
-                last_name: '',
-                rut: '',
-                adress: ''
-            }
-        ],
+        users: [],
         authStatus: false
     }
 
-    const [globalstate, dispatch] = useReducer(userReducer, userInitialState);
-    
-    //* METODO GET PARA OBTENER USUARIOS DESDE EL BACKEND DE DUNAMIS
+    const [ userGlobalState, dispatch ] = useReducer(userReducer, userInitialState);
 
-    const getUser = async () => {
+    // console.log('lista de usuarios', usuarios);
+    // const reducer = userReducer(userInitialState);
+    // console.log(reducer);
+    
+    //! METODO GET PARA OBTENER USUARIOS DESDE EL BACKEND DE DUNAMIS
+    const getUsers = async () => {
         try {
             //! SIEMPRE LA INFORMACIÓN PROVENIENTRE DE AXIOS LLEGARÁ EN UN OBJETO DE NOMBRE "data"
             const response = await axiosDunamisBackend.get('/usuarios');  //poner solo el final del end point en el get     
-            console.log('Lista de usuarios hasta el momento', response.data);
-
+            // console.log('Lista de usuarios hasta el momento', response.data);
+            console.log({message: 'Usuarios registrados desde el backend', usuarios: response.data});
+            
             dispatch({
-                type: "OBTENER_USUARIOS_REGISTRADOS",
+                type: "OBTENER_USUARIOS",
                 payload: response.data
             })
+
+            return response.data
+
         } catch (error) {
             console.log(error);        
         }
     }
 
-    //* METODO POST PARA LA CRACIÓN DE USUARIOS 
+    //! METODO POST PARA LA CRACIÓN DE USUARIOS 
     const signupUser = async (dataForm) => {
         try {
             const response = await axiosDunamisBackend.post('/usuarios', dataForm)
@@ -56,7 +56,7 @@ export const UserState = ({ children }) => {
         }
     }
 
-    //* METODO LOGIN PARA USUARIOS
+    //! METODO LOGIN PARA USUARIOS
     const loginUser = async(dataForm) => {
         try {
             const response = await axiosDunamisBackend.post('/login', dataForm)
@@ -72,7 +72,7 @@ export const UserState = ({ children }) => {
         }
     }
 
-    //*  METODO PARA CERRAR SESIÓN
+    //!  METODO PARA CERRAR SESIÓN
 
     const logoutUser = async () => {
         dispatch({
@@ -80,13 +80,11 @@ export const UserState = ({ children }) => {
         })
     }
 
-
     return (
         <userContext.Provider
             value={{
-                userData: globalstate.users,
-                authStatus: globalstate.authStatus,
-                getUser,
+                users: userGlobalState.users,
+                getUsers,
                 signupUser,
                 loginUser,
                 logoutUser

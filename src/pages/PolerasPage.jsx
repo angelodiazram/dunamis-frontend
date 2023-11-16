@@ -1,8 +1,12 @@
 
+
+import { CardPoleras } from "../components/cardProduct/CardPoleras";
+
 export const PolerasPage = () => {
+
     return (
         <>
-            <h2>Poleras</h2>
+            <CardPoleras /> 
         </>
     );
 };

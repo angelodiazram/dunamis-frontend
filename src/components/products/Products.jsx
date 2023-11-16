@@ -8,7 +8,7 @@ export const Products = () => {
             <div id='main-container'>
                 <h2>Algunos de nuestros productos</h2>
                 <div className='article-product'>
-                    <div className='img-container' id='img-planner'>
+                    <div className='img-container'>
                         <img src="assets/img/PLANNER_DUNAMIS.png" alt="Planners"/>
                     </div>
                     <div className='description-container'>
@@ -19,8 +19,8 @@ export const Products = () => {
                         </Link>
                     </div>
                 </div>
-                <div className='article-product' id='article-cuaderno'>
-                    <div className='img-container' id='img-cuaderno'>
+                <div className='article-product'>
+                    <div className='img-container'>
                         <img src="assets/img/CUADERNO_DUNAMIS.png" alt="Cuadernos"/>
                     </div>
                     <div className='description-container'>
@@ -31,8 +31,8 @@ export const Products = () => {
                         </Link>
                     </div>
                 </div>
-                <div className='article-product' id='article-polera'>
-                    <div className='img-container' id='img-polera'>
+                <div className='article-product'>
+                    <div className='img-container'>
                         <img src="assets/img/POLERON_DUNAMIS.png" alt="Poleras"/>
                     </div>
                     <div className='description-container'>

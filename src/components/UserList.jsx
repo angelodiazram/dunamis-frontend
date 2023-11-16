@@ -1,19 +1,32 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import userContext from "../context/Users/UserContext";
+
+
 
 export const UserList = () => {
     
+    const globalUserContext = useContext(userContext);
+    
+    const [usuarios, setUsuarios] = useState(['este es un arreglo vacio']);
     /*
     el hook useContext trae el estado global que necesitemos utilizar para luego almacenarlo
     en una variable para poder utilizar sus metodos
     */
-   const globalUserContext = useContext(userContext);
    
-   const { userData, getUser } = globalUserContext;
-   
-   useEffect(() => {
-       getUser()
-   }, [])
+    const { getUsers } = globalUserContext;
+    
+    const getAllUsers = async () => {
+        const dataUsers = await getUsers();
+        // console.log(dataUsers);
+        setUsuarios(dataUsers);
+    }
+
+
+    console.log('Porfin están llegando los usuarios!!!:', usuarios);
+
+    useEffect(() => {
+        getAllUsers()
+    }, [])
 
     return (
         <>
@@ -23,21 +36,19 @@ export const UserList = () => {
             para poder utilizar esa información 
             */}
             {
-                userData.map(user => {
-                    return (
-                        <div key={user.id}>
-                            <h2></h2>
-                            <ul>
-                                <li>Correo: {user.email}</li>
-                                <li>Contraseña: {user.pass}</li>
-                                <li>Nombre: {user.name}</li>
-                                <li>Apellidos: {user.last_name}</li>
-                                <li>Rut: {user.rut}</li>
-                                <li>Dirección: {user.adress}</li>
-                            </ul>
-                        </div>
-                    )
-                })
+                usuarios.map(usuario => (
+                    <div key={usuario.id}>
+                        <h2>{usuario.name}</h2>
+                        <ul>
+                            <li>Correo: {usuario.email}</li>
+                            <li>Contraseña: {usuario.pass}</li>
+                            <li>Nombre: {usuario.name}</li>
+                            <li>Apellidos: {usuario.last_name}</li>
+                            <li>Rut: {usuario.rut}</li>
+                            <li>Dirección: {usuario.adress}</li>
+                        </ul>
+                    </div>
+                ))
             }
         </>
     );

@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import userContext from "../context/Users/UserContext";
+
+
 import { useNavigate } from "react-router-dom";
+import userContext from "../context/Users/UserContext";
 
 export const SignupForm = () => {
     
@@ -9,7 +11,7 @@ export const SignupForm = () => {
 
     const navigate = useNavigate()
     
-    const { signupUser, getUser } = userCtx;
+    const { signupUser } = userCtx;
     
     // manejo de variables locales del componente "SignupForm"
     const [ data, setData ] = useState({
@@ -36,10 +38,6 @@ export const SignupForm = () => {
         alert('Has sido registrado con Exito')
         navigate('/login')
     }
-
-    useEffect(() => {
-        getUser()
-    }, [])
 
     return (
         <>

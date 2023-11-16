@@ -25,6 +25,10 @@
 #header-container .icons {
     list-style: none;
     margin-right: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
 }
 
 #header-container .top-link {
@@ -32,6 +36,15 @@
     font-size: 22px;
     transition: 300ms all;
 }
+
+#header-container #contador-carrito {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
 
 #header-container .top-link:hover {
     color: #E9CDE3;
@@ -129,6 +142,7 @@
 
 #header-container #main-rutes #ul-rutes .li-rutes .link {
     text-decoration: none;
+    box-sizing: content-box;
     color: #E0A986;
     font-size: 20px;
     font-family: 'Raleway', sans-serif;

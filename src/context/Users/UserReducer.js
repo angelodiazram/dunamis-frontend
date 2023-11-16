@@ -1,31 +1,31 @@
 
-export const userReducer = (globalState, action) => {
-    
+export const userReducer = (userGlobalState, action) => {
+
     switch (action.type) {
-        case "OBTENER_USUARIOS_REGISTRADOS":
+        case "OBTENER_USUARIOS":
             return {
-                ...globalState,
-                newUser: action.payload
+                ...userGlobalState, 
+                newUser: action.payload 
             }
 
         case "LOGIN":
 
             localStorage.setItem('token', action.payload.token)
             return {
-                ...globalState,
+                ...userGlobalState,
                 authStatus: true
             }
 
         case "REGISTRAR_USUARIO":
             localStorage.setItem('token', action.payload.token)
             return {
-                ...globalState,
+                ...userGlobalState,
                 authStatus: true
             }
 
         case "VERIFICACION_TOKEN":
             return {
-                ...globalState,
+                ...userGlobalState,
                 authStatus: true,
                 userData: action.payload
             }
@@ -39,6 +39,6 @@ export const userReducer = (globalState, action) => {
             }
 
         default:
-            return globalState
-    }
+            return userGlobalState
+    }      
 }
