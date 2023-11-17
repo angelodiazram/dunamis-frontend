@@ -7,6 +7,12 @@ export const polerasReducer = (globalState, action) => {
                 newPolera: action.payload
             }
 
+        case "SET_TOTAL":
+            return {
+                ...globalState,
+                total: action.payload
+            }
+            
         default:
             return globalState
     }

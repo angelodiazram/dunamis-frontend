@@ -6,13 +6,29 @@ import PolerasContext from './polerasContext';
 export const PolerasProvider = ({children}) => {
     
     const poleraInitialState = {
-        poleras: []
+        poleras: [],
+        total: 0
     }
 
     const [polerasCart, setPolerasCart] = useState([]);
+
+    const [cantidades, setCantidades] = useState(1);
+
+
     
     const [polerasGlobalState, dispatch] = useReducer(polerasReducer, poleraInitialState)
-    
+
+    const totalCart = (value) => {
+
+        dispatch({
+            type: "SET_TOTAL",
+            payload: value
+        })
+
+
+    }
+
+
     const getPoleras = async () => {
         try {
             const response = await axiosDunamisBackend.get('/poleras');
@@ -37,7 +53,11 @@ export const PolerasProvider = ({children}) => {
                 polerasData: polerasGlobalState.poleras,
                 getPoleras,
                 polerasCart,
-                setPolerasCart
+                setPolerasCart,
+                cantidades,
+                setCantidades,
+                totalCart,
+                totalValue: polerasGlobalState.total
             }}
         >
             {children}

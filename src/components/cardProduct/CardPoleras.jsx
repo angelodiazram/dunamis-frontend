@@ -7,48 +7,46 @@ export const CardPoleras = () => {
 
     const globalPolerasContext = useContext(PolerasContext);
 
-    const { getPoleras, polerasCart, setPolerasCart } = globalPolerasContext;
+    const { getPoleras, polerasCart, setPolerasCart, cantidades, setCantidades} = globalPolerasContext;
     
     const [poleras, setPoleras] = useState([])
 
     //* METODO PARA EL BOTON 'AGREGAR AL CARRITO'
-    const onAddPolera = ( selectedPolera ) => {
-        setPolerasCart([
-            ...polerasCart,
-            selectedPolera
-        ])
-
-        console.log(`llegado la siguiente polera con el SKU: ${selectedPolera.SKU} desde 'onAddPolera'`);
-        console.log({
-            productos_carrito: polerasCart,
-            cantidad: polerasCart.length
-        });
-    }
-    
-    //* METODO PARA EL BOTÓN 'COMPRAR'
-    const onAddUniquePolera = ( selectedPolera ) => {
-        setPolerasCart([selectedPolera]);
+    const onAddPolera = (selectedPolera) => {
         
-        console.log(`me ha llegado la siguiente polera con el SKU: ${selectedPolera.SKU} desde 'onAddUniquePolera'`);
-        console.log({
-            productos_carrito: polerasCart,
-            cantidad: polerasCart.length
-        });
-    }
+        const alreadyInCart = polerasCart.some(polera => polera._id === selectedPolera._id);
+        
+        if(!alreadyInCart) {
+            setPolerasCart([
+                ...polerasCart,
+                selectedPolera
+            ])
+        }
+
+    };
+    
+    // //* METODO PARA EL BOTÓN 'COMPRAR'
+    // const onAddUniquePolera = ( selectedPolera ) => {
+    //     setPolerasCart([selectedPolera]);
+        
+    //     // console.log(`me ha llegado la siguiente polera con el SKU: ${selectedPolera.SKU} desde 'onAddUniquePolera'`);
+    //     // console.log({
+    //     //     productos_carrito: polerasCart,
+    //     //     cantidad: polerasCart.length
+    //     // });
+    // }
 
     const getAllPoleras = async () => {
         const dataPoleras = await getPoleras();
         setPoleras(dataPoleras);
     }
 
-
     useEffect(() => {
         getAllPoleras()
-        console.log({ message: 'Función getAllPoleras ejecutada para para poder traer los productos y hacer un map()'});
+        // console.log({ message: 'Función getAllPoleras ejecutada para para poder traer los productos y hacer un map()'});
     }, [])
 
     // console.log({ id_uno: poleras[0]._id }); 
-
 
     return (
         <>
@@ -75,13 +73,6 @@ export const CardPoleras = () => {
                                         onClick={() => {onAddPolera(polera)}}
                                     >
                                         Añadir al carrito
-                                    </button>
-                                    
-                                    <button 
-                                        className="button-cart"
-                                        onClick={() => {onAddUniquePolera(polera)}}
-                                    >
-                                        Comprar
                                     </button>
                                 </div>
                             </div>

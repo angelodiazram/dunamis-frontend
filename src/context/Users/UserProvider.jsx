@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
 
     //! ESTADO INICIAL DEL REDUCER
     const userInitialState = {
-        users: [],
+        user: null,
         authStatus: false
     }
 
@@ -49,7 +49,7 @@ export const UserProvider = ({ children }) => {
             
             dispatch({
                 type: "REGISTRAR_USUARIO",
-                payload: response.data
+                payload: response.data,
             })
         } catch (error) {
             console.log(error)
@@ -61,15 +61,42 @@ export const UserProvider = ({ children }) => {
         try {
             const response = await axiosDunamisBackend.post('/login', dataForm)
 
+            // console.log({
+            //     token: response.data,
+            //     authStatus: userGlobalState.authStatus,
+            //     loginUser: dataForm
+            // });
+
             console.log(response.data);
 
             dispatch({
                 type: "LOGIN",
                 payload: response.data
             })
+
         } catch (error) {
             console.log(error)
         }
+
+    }
+
+    const verifyToken = async () => {
+        const token = localStorage.getItem('token');
+
+        if (token) {
+            axiosDunamisBackend.defaults.headers.common['authorization'] = token
+        } else {
+            delete axiosDunamisBackend.defaults.headers.common['authorization']
+        }
+
+        const response = await axiosDunamisBackend.get('/verify-token')
+
+        dispatch({
+            type: "OBTENER_USUARIO",
+            payload: response.data
+        })
+
+        return response.data
     }
 
     //!  METODO PARA CERRAR SESIÓN
@@ -83,11 +110,13 @@ export const UserProvider = ({ children }) => {
     return (
         <userContext.Provider
             value={{
-                users: userGlobalState.users,
+                users: userGlobalState.user,
+                authStatus: userGlobalState.authStatus,
                 getUsers,
                 signupUser,
                 loginUser,
-                logoutUser
+                logoutUser,
+                verifyToken
             }}
         >
             {children}

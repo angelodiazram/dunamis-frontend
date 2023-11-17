@@ -14,7 +14,7 @@ export const Products = () => {
                     <div className='description-container'>
                         <h3>Planners</h3>
                         <p>Planifica con Dunamis Papeleria 📒</p>
-                        <Link>
+                        <Link to='/planners'>
                             <button>VER LOS PLANNERS DE DUNAMIS</button>
                         </Link>
                     </div>
@@ -26,7 +26,7 @@ export const Products = () => {
                     <div className='description-container'>
                         <h3>Cuadernos</h3>
                         <p>Plasma tus ideas con Dunamis Papeleria 📙</p>
-                        <Link>
+                        <Link to='/cuadernos'>
                             <button>VER LOS CUADERNOS DE DUNAMIS</button>
                         </Link>
                     </div>
@@ -38,7 +38,7 @@ export const Products = () => {
                     <div className='description-container'>
                         <h3>Poleras</h3>
                         <p>Viste a la moda con Dunamis Papeleria 👕</p>
-                        <Link>
+                        <Link to='/poleras'> 
                             <button>VER LAS POLERAS DE DUNAMIS</button>
                         </Link>
                     </div>

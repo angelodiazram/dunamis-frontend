@@ -1,0 +1,116 @@
+#cart-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#cart-container #title-carro {
+    width: 100%;
+    font-size: 50px;
+    font-family: 'DM Serif Display', serif;
+    text-align: center;
+    margin: 30px 0px;
+}
+
+#cart-container #cart-table {
+    border: 1px solid #cbcbcb;
+    width: 70%;
+    border-radius: 5px;
+    
+}
+
+#cart-container #cart-table .header-table #header-ul {
+    border-bottom: 1px solid #cbcbcb;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+}
+
+#cart-container #cart-table .header-table #header-ul .header-li {
+    list-style: none;
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+}
+
+#cart-container #cart-table #body-table .body-ul {
+    list-style: none;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#cart-container #cart-table #body-table .body-ul .li-one img {
+    height: 120px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+#cart-container #cart-table #body-table .body-ul .body-li button {
+    border: none;
+    background-color: transparent;
+    color: #000;
+}
+
+#cart-container #cart-table #body-table .body-ul .body-li button:active {
+    color: #E0A986;
+}
+
+.li-one {
+    flex: 3;
+}
+.li-two {
+    flex: 2;
+}
+.li-three {
+    flex: 1;
+}
+.li-four {
+    flex: 2;
+}
+
+.li-four .contador {
+    border: 1px solid #cbcbcb;
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+}
+
+.li-four .contador .button-count {
+    transition: 200ms all;
+}
+
+.li-four .contador .button-count:hover{
+    background-color: #E0A986;
+}
+
+.li-four .contador .button-rest {
+    flex: 1;
+}
+
+.li-four .contador .count {
+    flex : 1;
+    text-align: center;
+}
+
+.li-four .contador .button-add {
+    flex: 1;
+}
+
+#cart-table #p-total {
+    font-family: 'DM Serif Display', serif;
+    width: 100%;
+    margin-left: 20px;
+    font-size: 30px;
+    border-top: #000;
+}
+
+#cart-table #p-total span {
+    font-family: 'Raleway', sans-serif;
+}
+

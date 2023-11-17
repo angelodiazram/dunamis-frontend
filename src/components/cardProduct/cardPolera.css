@@ -93,11 +93,15 @@ p {
     padding: 0px 5px;
     border: 1px solid #000;
     border-radius: 5px;
-    transition: 300ms all;
+    transition: 200ms all;
     
 }
 
 .card-container .precio-button .buttons-container .button-cart:hover {
     background-color: #E6CDE3;
     box-shadow: 2px 2px 3px #5e5d5d;
+}
+
+.card-container .precio-button .buttons-container .button-cart:active {
+    background-color: transparent;
 }

@@ -1,9 +1,18 @@
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import PolerasContext from "../../context/poleras/polerasContext";
+import { useContext } from "react";
 
-export const PaypalButton = ({invoice, totalValue}) => {
+export const PaypalButton = ({invoice}) => {
+    
+    const { totalValue } = useContext(PolerasContext);
+
+    
+    
+    
     return (
         <PayPalButtons 
             createOrder = {(data, actions) => {
+
                 return actions.order.create({
                     purchase_units: [
                         {

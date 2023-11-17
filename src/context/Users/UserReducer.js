@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode"
 
 export const userReducer = (userGlobalState, action) => {
 
@@ -10,10 +11,22 @@ export const userReducer = (userGlobalState, action) => {
 
         case "LOGIN":
 
-            localStorage.setItem('token', action.payload.token)
+            localStorage.setItem('token', action.payload)
+
+            const decodedToken = jwtDecode(action.payload)
+            
             return {
                 ...userGlobalState,
-                authStatus: true
+                authStatus: true,
+                user: decodedToken.data
+            }
+
+        case "OBTENER_USUARIO":
+
+            return {
+                ...userGlobalState,
+                authStatus: true,
+                userData: action.payload
             }
 
         case "REGISTRAR_USUARIO":

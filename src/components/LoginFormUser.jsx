@@ -1,10 +1,14 @@
-import { useState } from "react";
-import { axiosDunamisBackend } from "../config/dunamisApi";
+import { useContext, useEffect, useState } from "react";
+
 import { useNavigate } from "react-router-dom";
+import userContext from "../context/Users/UserContext";
 
 export const LoginFormUser = () => {
 
     const navigate = useNavigate();
+
+    const userCtx = useContext(userContext);
+    const { loginUser } = userCtx;
 
     // ESTADO INICIAL DEL FORMULARIO
     const initialLoginForm = {
@@ -12,7 +16,7 @@ export const LoginFormUser = () => {
         pass: ''
     }
 
-    const [ LoginForm, setLoginForm ] = useState (initialLoginForm);
+    const [ loginForm, setLoginForm ] = useState (initialLoginForm);
     
     // FUNCIÓN PARA MANEJAR EL EVENTO DE LOS INPUTS
     const handleLoginFormChange = (event) => {
@@ -20,27 +24,18 @@ export const LoginFormUser = () => {
         const valueForm = event.target.value;
 
         setLoginForm({
-            ...LoginForm,
+            ...loginForm,
             [keyForm]: valueForm
         })
     }
 
-    const onSubmitLoginForm = async (event) => {
+    const onSubmitLoginForm = (event) => {
         event.preventDefault();
-        console.log('submit presionado');
-        try {
-            const {data} = await axiosDunamisBackend.post('/login', LoginForm); 
-            console.log('Token generado', data);
-    
-            const tokenString = JSON.stringify(data)
-            localStorage.setItem('token', tokenString);
-    
-            alert('Inicio de sesión exitoso');
-            navigate('/');
-        } catch (error) {
-            alert('Datos de usuario erroneos, intente nuevamente')
-            console.log('No se pudo iniciar sesión')
-        }
+        loginUser(loginForm)
+
+        console.log('submit presionado'); 
+        // alert('Inicio de sesión exitoso');
+        navigate('/');
     }
 
     return (
@@ -50,7 +45,7 @@ export const LoginFormUser = () => {
                 <input 
                     type="email" 
                     name="email" 
-                    value={LoginForm.email}
+                    value={loginForm.email}
                     id="email-login" 
                     onChange={handleLoginFormChange} 
                     required
@@ -60,7 +55,7 @@ export const LoginFormUser = () => {
                 <input 
                     type="password" 
                     name="pass"
-                    value={LoginForm.pass} 
+                    value={loginForm.pass} 
                     id="pass-login" 
                     onChange={handleLoginFormChange} 
                     required
@@ -69,4 +64,4 @@ export const LoginFormUser = () => {
             </form>
         </>
     );
-};
+}

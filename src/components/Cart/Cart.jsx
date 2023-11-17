@@ -1,26 +1,46 @@
 import { useContext, useEffect, useState } from "react";
 import PolerasContext from "../../context/poleras/polerasContext";
-import { PayPalButtons } from "@paypal/react-paypal-js";
+
+import { CartEmpty } from "../cartEmpty/CartEmpty";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { PaypalButton } from "../PayPal/PaypalButton";
 
 import './cart.css';
-import { CartEmpty } from "../cartEmpty/CartEmpty";
 
 export const Cart = () => {
-    
+
     const polerasCtx = useContext(PolerasContext);
 
-    const { polerasCart } = polerasCtx;
+    const { polerasCart, cantidades, setCantidades, totalCart } = polerasCtx;
     const [total, setTotal] = useState(0);
+
+
     
-    
-    useEffect(() => {
+    const establecerPrecio = () => {
         const totalPriceUSD = polerasCart.reduce((acumulador, actualValue) => {
             const priceUSD = parseFloat(actualValue.precio);
-            return acumulador + priceUSD;
+            const cantidad = cantidades[actualValue._id] || 1;
+            return acumulador + priceUSD * cantidad;
         }, 0)
-
+        
+        console.log(totalPriceUSD);
         setTotal(totalPriceUSD);
-    }, [polerasCart]);
+        totalCart(totalPriceUSD);
+    }
+    
+    useEffect(() => {
+        establecerPrecio();
+
+    }, [polerasCart, cantidades]);
+
+    const onDeleteProductCart = (id) => {
+        console.log(id)
+        const updatedCart = polerasCart.filter(polera => polera._id !== id);
+
+        polerasCtx.setPolerasCart(updatedCart);
+    }
 
     if (total <= 0) {
         return (
@@ -30,29 +50,80 @@ export const Cart = () => {
         )
     }
 
+    const onHandleRest = (id) => {
+        // Lógica para disminuir la cantidad, sin que baje de 1
+        const nuevaCantidad = Math.max(1, cantidades[id] - 1);
+        setCantidades({ 
+            ...cantidades, 
+            [id]: nuevaCantidad });
+    }
     
+    const onHandleAdd = (id) => {
+        // Lógica para aumentar la cantidad
+        const nuevaCantidad = (cantidades[id] || 0) + 1;
+        setCantidades({ 
+            ...cantidades, 
+            [id]: nuevaCantidad });
+    }
+
     return (
-        <>
-            <h2>Carrito de compras</h2>
-            <ul>
-                {
-                    polerasCart.map( poleraCart => (
-                        <li key={poleraCart._id}>
-                            {`${poleraCart.description} - $${poleraCart.precio}`}
-                        </li>
-                    ))
-                }
-            </ul>
+        <div id="cart-container">
+            <h2 id="title-carro">Carrito de compras</h2>
+            <div id="cart-table">
+                <div className="header-table">
+                    <ul id="header-ul">
+                        <li className="header-li li-one">Producto</li>
+                        <li className="header-li li-two">Precio unitario</li>
+                        <li className="header-li li-four">Cantidad</li>
+                        <li className="header-li li-three">Quitar</li>
+                    </ul>
+                </div>
+                <div id="body-table">
+                    {
+                        polerasCart.map(polera => (
+                            <ul key={polera._id} className="body-ul">
+                                <li className="body-li li-one" id="">
+                                    <img src={polera.urlImg} alt={polera.description} />
+                                    <span>{polera.description}</span>
+                                </li>
+                                <li className="body-li li-two">$ {polera.precio}</li>
+                                <li className="body-li li-four">
+                                    <div className="contador">
+                                        <button
+                                            className="button-rest button-count"
+                                            onClick={() => onHandleRest(polera._id)}
+                                        >
+                                            -
+                                        </button>
+                                        <span className="count">{cantidades[polera._id] || 1}</span>
+                                        <button
+                                            className="button-add button-count"
+                                            onClick={() => onHandleAdd(polera._id)}
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                </li>
+                                <li className="body-li li-three">
+                                    <button
+                                        onClick={() => { onDeleteProductCart(polera._id) }}
+                                    >
+                                        <FontAwesomeIcon icon={faTrash} />
+                                    </button>
+                                </li>
+                            </ul>
+                        ))
+                    }
+                </div>
+                <p id="p-total">
+                    Total, a pagar: <span>${total} CLI</span> 
+                </p>
+            </div>
 
-            <p>
-                Total, a pagar: ${total.toFixed(2)} USD
-            </p>
-
-            <PayPalButtons 
-                invoice = {'Detalle de la compra'}
-                totaValue = {total.toFixed(2)}
+            <PaypalButton
+                invoice={'Detalle de la compra'}
                 
             />
-        </>
+        </div>
     );
 };
