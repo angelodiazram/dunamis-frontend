@@ -82,5 +82,35 @@
     margin: 15px 0px;
 }
 
+@media (max-width: 768px) {
+    
+    #main-footer #top-footer {
+        flex-direction: column;
+        align-content: center;
+        flex-wrap: wrap;
+    }
 
-/** FIN BOTTOM FOOTER  */
+    #main-footer #top-footer #nosotros {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+    
+    #main-footer #top-footer #adress {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+
+    #main-footer #top-footer #contacto {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+
+    #main-footer #bottom-footer #derechos {
+        width: 80%;
+        text-align: center;
+    }
+
+
+
+
+}

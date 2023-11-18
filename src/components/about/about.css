@@ -1,12 +1,12 @@
 #article-about {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     width: 100%;
     height: 300px;
     margin-top: 20px;
     justify-content: center;
-    align-content: center;
+    align-items: center;
 } 
 
 

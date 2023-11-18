@@ -69,5 +69,49 @@
     flex-direction: row-reverse;
 }
 
+/*! SECCIÓN DE MEDIA QUERYS */
+
+@media (max-width: 768px) {
+    
+    #main-container .article-product {
+        width: 80%;
+        
+    }
+
+    #main-container .article-product .img-container img{
+        width: 100%;
+    }
+}
+
+@media (max-width: 699px) {
+
+    #main-container .article-product {
+        flex-direction: column-reverse;
+    }
+
+    #main-container .article-product .description-container {
+        width: 100%;
+        margin-left: 0px;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    #main-container .article-product .img-container {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+
+    #main-container .article-product .description-container p {
+        text-align: center;
+    }
+}
+
+@media (max-width: 590px) {
+    #main-container h2 {
+        width: 90%;
+        font-size: 35px;
+        margin-bottom: 30px;
+    }
+}
 
 

@@ -30,7 +30,9 @@ export const userReducer = (userGlobalState, action) => {
             }
 
         case "REGISTRAR_USUARIO":
-            localStorage.setItem('token', action.payload.token)
+
+            localStorage.setItem('token', action.payload)
+            
             return {
                 ...userGlobalState,
                 authStatus: true
@@ -52,6 +54,7 @@ export const userReducer = (userGlobalState, action) => {
             }
 
         default:
+            
             return userGlobalState
     }      
 }

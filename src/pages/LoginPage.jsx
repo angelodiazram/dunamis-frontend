@@ -1,11 +1,9 @@
-import { LoginFormUser } from "../components/LoginFormUser";
-
+import { LoginFormUser } from "../components/loginFormUser/LoginFormUser";
 
 export const LoginPage = () => {
 
     return (
         <>
-            <h2>Login page</h2>
             <LoginFormUser />            
         </>
     );

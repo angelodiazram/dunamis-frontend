@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import userContext from "../context/Users/UserContext";
 
-
-
 export const UserList = () => {
     
     const globalUserContext = useContext(userContext);
@@ -45,6 +43,7 @@ export const UserList = () => {
                             <li>Nombre: {usuario.name}</li>
                             <li>Apellidos: {usuario.last_name}</li>
                             <li>Rut: {usuario.rut}</li>
+                            <li>Rut: {usuario.phone}</li>
                             <li>Dirección: {usuario.adress}</li>
                         </ul>
                     </div>
